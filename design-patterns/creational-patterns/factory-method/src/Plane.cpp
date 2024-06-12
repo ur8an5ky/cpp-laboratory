@@ -4,5 +4,5 @@
 
 void Plane::deliver() const
 {
-    std::cout<<"Delivered by "<<_type<<" named "<<_name<<std::endl;
+    std::cout<<_type<<" "<<_name<<std::endl;
 }

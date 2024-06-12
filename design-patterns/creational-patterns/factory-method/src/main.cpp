@@ -1,25 +1,28 @@
-#include "../include/ITransport.hpp"
-#include "../include/Truck.hpp"
-#include "../include/Ship.hpp"
-#include "../include/Train.hpp"
-#include "../include/Plane.hpp"
-
+#include "../include/Logistics.hpp"
+#include "../include/AirLogistics.hpp"
+#include "../include/RailLogistics.hpp"
+#include "../include/RoadLogistics.hpp"
+#include "../include/SeaLogistics.hpp"
 
 #include <vector>
 #include <memory>
+#include <iostream>
 
 int main()
 {
-    std::vector<std::unique_ptr<ITransport>> transports;
+    std::vector<std::unique_ptr<Logistics>> logistics;
 
-    transports.push_back(std::make_unique<Truck>("Volvo FH16"));
-    transports.push_back(std::make_unique<Ship>("Emma Maersk"));
-    transports.push_back(std::make_unique<Train>("GE ES44AC"));
-    transports.push_back(std::make_unique<Plane>("Boeing 747-8F"));
+    logistics.push_back(std::make_unique<AirLogistics>());
+    logistics.push_back(std::make_unique<RailLogistics>());
+    logistics.push_back(std::make_unique<RoadLogistics>());
+    logistics.push_back(std::make_unique<SeaLogistics>());
 
-    for(auto& transport: transports)
+    std::vector<std::string> names = {"Boeing 747-8F", "GE ES44AC", "Volvo FH16", "Emma Maersk"};
+
+    for(int i=0; i<4; ++i)
     {
-        transport->deliver();
+        std::cout<<"Package no. "<<i+1<<" has been delivered by: ";
+        logistics[i]->planDelivery(names[i]);
     }
 
     return 0;
